@@ -9,10 +9,24 @@ var createScene = function () {
 
     var box = BABYLON.Mesh.CreateBox("Box", 4.0, scene);
     var box2 = BABYLON.Mesh.CreateBox("Box2", 4.0, scene);
+
     var material = new BABYLON.StandardMaterial("material1", scene);
     material.wireframe = true;
     box2.material = material;
     box2.position = new BABYLON.Vector3(0,5,0);
+
+    var material2 = new BABYLON.StandardMaterial('mat2', scene);
+    material2.diffuseColor = BABYLON.Color3.Blue();
+    // material2.emissiveColor = BABYLON.Color3.Red();
+    // material2.specularColor = BABYLON.Color3.Red(); //what color light is when it reflects
+    // material2.alpha = 0.9; //transparency
+    
+    // material2.diffuseTexture = new BABYLON.Texture('name.png',scene); //textures
+    // material2.bumpTexture = new BABYLON.Texture('gfs_normals.png',scene);
+    // material2.roughness = 0.05;
+
+    box.material = material2;
+    
 
     // var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0,0,-10), scene);
     // camera.setTarget(BABYLON.Vector3.Zero());
@@ -38,7 +52,7 @@ var createScene = function () {
 
     //##############################
     //pointlight example
-    // var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(0,10,0), scene);
+    var light = new BABYLON.PointLight("pointLight", new BABYLON.Vector3(0,10,0), scene);
     // light.diffuse = new BABYLON.Color3(1,0,0);
 
     // //to create light controlled by spacebar
@@ -50,10 +64,12 @@ var createScene = function () {
     //     })
     // )
 
+    light.parent = camera;
+    light.diffuse = new BABYLON.Color3(1,1,1);
+
     //##############################
     //spotlight example
-
-    var light = new BABYLON.SpotLight('spotlight', new BABYLON.Vector3(0,10,0), new BABYLON.Vector3(0,-1,0 ), BABYLON.Tools.ToRadians(45), 0.1, scene);
+    // var light = new BABYLON.SpotLight('spotlight', new BABYLON.Vector3(0,10,0), new BABYLON.Vector3(0,-1,0 ), BABYLON.Tools.ToRadians(45), 0.1, scene);
 
     return scene;
 }
@@ -70,8 +86,13 @@ engine.runRenderLoop(function(){
     // light.diffuse.g += .01;
 
     //################ spotlight ##################
-    var light = scene.getLightByName("spotlight");
-    light.position.y -= 0.01;
+    // var light = scene.getLightByName("spotlight");
+    // light.position.y -= 0.01;
+
+    //##################### material transparency #############
+    // var material = scene.getMeshByName("Box").material;
+    // material.alpha -= 0.01;
+    // if(material.alpha < 0.01){ material.alpha = 1}
     
     scene.render();
     
