@@ -8,16 +8,19 @@ var createScene = function () {
     var scene = new BABYLON.Scene(engine);
 
     // Add a camera to the scene and attach it to the canvas
-    var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new BABYLON.Vector3(0,0,5), scene);
+    var camera = new BABYLON.ArcRotateCamera("Camera",BABYLON.Tools.ToRadians(-135), BABYLON.Tools.ToRadians(60), 20.0, new BABYLON.Vector3(0,0,0), scene);
     camera.attachControl(canvas, true);
 
     // Add lights to the scene
-    var light1 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(1, 1, 0), scene);
-    var light2 = new BABYLON.PointLight("light2", new BABYLON.Vector3(0, 1, -1), scene);
+    var light1 = new BABYLON.PointLight("light1", new BABYLON.Vector3(0, 10, 0), scene);
 
     // Add and manipulate meshes in the scene
-    var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter:2}, scene);
-    var plane = BABYLON.MeshBuilder.CreatePlane("somePlane", {width:10, height:5,  sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+//     var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter:2}, scene);
+createGround();
+//     var plane = BABYLON.MeshBuilder.CreateGround("GroundPlane", {width:2, height:2,  sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+//     var plane2 = BABYLON.MeshBuilder.CreateGround("GroundPlane2", {width:2, height:2,  sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+//     plane2.position = new BABYLON.Vector3(0, 0, 2);
+
 
     return scene;
 };
@@ -34,3 +37,31 @@ engine.runRenderLoop(function () {
 window.addEventListener("resize", function () { 
         engine.resize();
 });
+
+
+
+function createGround(){
+        var ground = [];
+
+        var greenMat = new BABYLON.StandardMaterial('greenMat', scene);
+        greenMat.diffuseColor = BABYLON.Color3.Green();
+    
+
+        for(var i = 0; i<32; i++){
+                for (var k = 0; k<32; k++){
+                        let name = 'ground'+i+k;
+                        // console.log(name);
+                        let plane = BABYLON.MeshBuilder.CreateGround( name , {width:2,height:2, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+                        plane.position = new BABYLON.Vector3(i*2, 0, k*2);
+
+                        if(i%2 == true){
+                                if(k%2 == true){ plane.material = greenMat; }
+                        }else{
+                                if(k%2 == false){ plane.material = greenMat; }
+                        }
+
+                }
+        }
+
+        return ground
+}
