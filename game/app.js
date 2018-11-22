@@ -2,27 +2,22 @@ var canvas = document.getElementById("renderCanvas"); // Get the canvas element
 var engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
 
 /******* Add the create scene function ******/
+// each scene is a level to be loaded.
 var createScene = function () {
 
-    // Create the scene space
-    var scene = new BABYLON.Scene(engine);
+        // Create the scene space
+        var scene = new BABYLON.Scene(engine);
 
-    // Add a camera to the scene and attach it to the canvas
-    var camera = new BABYLON.ArcRotateCamera("Camera",BABYLON.Tools.ToRadians(-135), BABYLON.Tools.ToRadians(60), 20.0, new BABYLON.Vector3(0,0,0), scene);
-    camera.attachControl(canvas, true);
+        // Add a camera to the scene and attach it to the canvas
+        var camera = new BABYLON.ArcRotateCamera("Camera",BABYLON.Tools.ToRadians(-135), BABYLON.Tools.ToRadians(60), 20.0, new BABYLON.Vector3(0,0,0), scene);
+        camera.attachControl(canvas, true);
 
-    // Add lights to the scene
-    var light1 = new BABYLON.PointLight("light1", new BABYLON.Vector3(0, 10, 0), scene);
+        // Add lights to the scene
+        var light1 = new BABYLON.PointLight("light1", new BABYLON.Vector3(0, 10, 0), scene);
 
-    // Add and manipulate meshes in the scene
-//     var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter:2}, scene);
-createGround();
-//     var plane = BABYLON.MeshBuilder.CreateGround("GroundPlane", {width:2, height:2,  sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
-//     var plane2 = BABYLON.MeshBuilder.CreateGround("GroundPlane2", {width:2, height:2,  sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
-//     plane2.position = new BABYLON.Vector3(0, 0, 2);
+        createGround();
 
-
-    return scene;
+        return scene;
 };
 /******* End of the create scene function ******/    
 
@@ -39,13 +34,12 @@ window.addEventListener("resize", function () {
 });
 
 
-
+//helper function
 function createGround(){
         var ground = [];
 
         var greenMat = new BABYLON.StandardMaterial('greenMat', scene);
         greenMat.diffuseColor = BABYLON.Color3.Green();
-    
 
         for(var i = 0; i<32; i++){
                 for (var k = 0; k<32; k++){
@@ -62,6 +56,5 @@ function createGround(){
 
                 }
         }
-
         return ground
 }
