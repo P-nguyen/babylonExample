@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dev_server.js",
+    "bundle": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +19,15 @@
   },
   "homepage": "https://github.com/P-nguyen/babylonExample#readme",
   "dependencies": {
-    "babylonjs": "^3.3.0",
-    "express": "^4.16.4"
+    "babylonjs": "^3.3.0"
+  },
+  "devDependencies": {
+    "css-loader": "^1.0.1",
+    "express": "^4.16.4",
+    "file-loader": "^2.0.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-middleware": "^3.4.0"
   }
 }
