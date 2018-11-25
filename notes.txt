@@ -1,0 +1,6 @@
+maps
+    determined by color maps (red);
+    red has a scale of 255
+    each level is 10' tall.
+        baseHeight = 10/255
+        planeHeight = (baseHeight)*pixelColor
