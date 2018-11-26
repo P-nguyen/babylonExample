@@ -9,13 +9,14 @@ export function createGround( mapData, scene ){
                 for (var k = 0; k<32; k++){
                         let name = 'ground'+i+k;
                         // console.log(name);
-                        let plane = BABYLON.MeshBuilder.CreateGround( name , {width:2,height:2, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
-                        plane.position = new BABYLON.Vector3(i*2, mapData[pixelCount], k*2);
+                        // let plane = BABYLON.MeshBuilder.CreateGround( name , {width:2,height:2, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+                        let box = BABYLON.MeshBuilder.CreateBox(name, {height: 2, width: 2, depth: 2}, scene);
+                        box.position = new BABYLON.Vector3(i*2, mapData[pixelCount], k*2);
 
                         if(i%2 == true){
-                                if(k%2 == true){ plane.material = greenMat; }
+                                if(k%2 == true){ box.material = greenMat; }
                         }else{
-                                if(k%2 == false){ plane.material = greenMat; }
+                                if(k%2 == false){ box.material = greenMat; }
                         }
                         pixelCount++;
                 }
